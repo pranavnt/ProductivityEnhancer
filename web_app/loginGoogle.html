@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="393848771937-rm1sl09r1b2vrm7f5ejmquceosi84ukb.apps.googleusercontent.com">
+    <title>Oauth2 web</title>
+
+    <!-- Google library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <!-- Jquery library to print the information easier -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Bootstrap library for the button style-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="profileinfo">
+</div>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<script>
+            function onSignIn(googleUser) {
+              var profile = googleUser.getBasicProfile();
+              console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+              console.log('Name: ' + profile.getName());
+              console.log('Image URL: ' + profile.getImageUrl());
+              console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+              $("#profileinfo").append("<h2>Sup " + profile.getName() + ", welcome home my friend</h2>");
+              $("#profileinfo").append("<img style='width:250px;height:250px' src='" + profile.getImageUrl() + "'><br><br>");
+              $("#profileinfo").append("<p>Your email is: " + profile.getEmail() + "</p>");
+
+            }
+        </script>
+
+<button type="button" class="btn btn-danger" onclick="signOut();">Sign out</button>
+
+<script>
+            function signOut() {
+               var auth2 = gapi.auth2.getAuthInstance();
+               auth2.signOut().then(function () {
+                 console.log('User signed out.');
+               $("#profileinfo").empty();
+               $("#profileinfo").append("<h2>Goodbye old friend</h2>");
+               });
+            }
+        </script>
+</body>
+</html>
