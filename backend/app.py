@@ -11,6 +11,7 @@ from flask_login import (
     login_user,
     logout_user,
 )
+#grants authorization to the workflow
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
@@ -19,8 +20,8 @@ from username import User
 from db import init_db_command
 
 
-GOOGLE_CLIENT_ID = os.environ.get("393848771937-rm1sl09r1b2vrm7f5ejmquceosi84ukb.apps.googleusercontent.com", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("plsrtMK8DFxPKCUU2y6je2py", None)
+GOOGLE_CLIENT_ID = os.environ.get("1035241525981-p6gh05bi5qe0t5t3eu8ci9io703nimpr.apps.googleusercontent.com", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("xnhDNLc119gXNP_Q4cYTBi4e", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
