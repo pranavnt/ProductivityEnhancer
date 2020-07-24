@@ -1,0 +1,22 @@
+{
+  "name": "synhacksteam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranavnt/SynhacksTeam.git"
+  },
+  "author": "Anjali Sreenivas, Druhin Bhowal, Pranav Teegavarapu, Shreya Pandey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pranavnt/SynhacksTeam/issues"
+  },
+  "homepage": "https://github.com/pranavnt/SynhacksTeam#readme",
+  "dependencies": {
+    "fomantic-ui": "^2.8.6"
+  }
+}
