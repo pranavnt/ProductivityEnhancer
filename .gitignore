@@ -2,4 +2,3 @@
 backend/__pycache__
 .pycache
 node_modules
-database.db
