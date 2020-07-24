@@ -84,5 +84,10 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/calendar')
+@login_required
+def calendar():
+    return render_template('calendar.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
