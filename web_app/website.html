@@ -22,6 +22,8 @@
             border: 2px solid rgb(217,240,240); 
             padding: 20px;
             margin: 20px;
+            margin-left:0px;
+            margin-right:0px;
             
         }
 
@@ -32,14 +34,28 @@
             text-align: center;
             font-size: 205%;
             padding: 20px;
-            margin:20px;
             margin-top:370px;
+            margin-bottom: 5px;
+        }
+
+        h4 {
+            background-color: rgb(217,240,240);
+            color: black; 
+            font-family: TW Cen MT;
+            text-align: center;
+            font-size: 205%;
+            padding: 20px;
+            margin-top:520px;
+            margin-bottom:5px;
         }
 
         div.gallery {
             margin: 16px;
             float: left;
-            width: 380px;
+        }
+
+        div.gallery:hover {
+            border: 1.5px solid #777;  
         }
 
 
@@ -53,6 +69,10 @@
             margin: 0px;
             margin-top: 5px;
             text-align: center;
+        }
+
+        div.desc:hover {
+            background-color:teal;
         }
 
         div.steps{
@@ -70,6 +90,28 @@
             margin: 0px;
             margin-bottom: 10px;
             text-align: center;
+        }
+
+        div.button{
+            margin: 10px;
+            text-align: center;
+        }
+
+        button{
+            background-color: teal;
+            border: none;
+            font-family: TW Cen MT;
+            font-size: 80%;
+            color: white;
+            width: 110px;
+            height:60px;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        button:hover{
+            background-color: black;
         }
 
     </style>
@@ -116,6 +158,15 @@
   <img src="C:\Users\anjal\Pictures\fruits.jpg" alt="Northern Lights" width="380" height="250">
 </div>
 
+<!--Get Started Button-->
+
+<div class="button">
+    <h4>Do you want to enhance your productivity today?
+        <button onclick="document.location='default.asp'">Login</button>
+        <button onclick="document.location='default.asp'">Register</button>
+    </h4> 
+
+</div>
 
 </body>
 </html>
