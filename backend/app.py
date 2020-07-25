@@ -116,7 +116,8 @@ def compute():
     repo.save_data()
     events_array = repo.get_events(username)
     events_array = [events_array['title', 'start', 'end', 'daysOfWeek', 'startTime', 'endTime', 'startRecur', 'endRecur', 'editable', 'backgroundColor', 'borderColor', 'textColor']]
-    return render_template('calendar.html', events=events_array )
+    events_array = repo.return_as_json(events_array)
+    return render_template('calendar.html', events=events_array)
 
 if __name__ == '__main__':
     app.run(debug=True)

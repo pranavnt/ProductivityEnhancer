@@ -23,5 +23,8 @@ class UserRepository:
         self.user_df = self.user_df.append(user_event, ignore_index=True)
 
     def get_events(self, username):
-        
         return self.user_df.loc[self.user_df['username'] == username, :]
+    
+    def return_as_json(self, events_list):
+        return events_list.to_json()
+
