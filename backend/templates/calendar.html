@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8' />
 <title>Schedule</title>
-<link href="{{url_for('.static', filename='main.css')}}" rel='stylesheet' />
+<link href="{{url_for('../static/main.css}}'" rel='stylesheet' />
 <script src="{{url_for('.static', filename='main.js')}}"></script>
 <script>
 
@@ -20,57 +20,7 @@
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2020-06-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-06-07',
-          end: '2020-06-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-06-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-06-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-06-11',
-          end: '2020-06-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-06-12T10:30:00',
-          end: '2020-06-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-06-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-06-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-06-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-06-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-06-13T07:00:00'
-        },
-      ]
+      events: { events }
     });
 
     calendar.render();
@@ -123,6 +73,13 @@
 </style>
 </head>
 <body>
+  <div 
+  <form action="api.url">
+    <input type="text" name="name" />
+    <input type="date" name="date_started" />
+    <input type="date" name="date finished" />
+    <input type="submit" value="submit" />
+  </form>
 
   <h1><b>Productivity Enhancer</b></h1>
 
