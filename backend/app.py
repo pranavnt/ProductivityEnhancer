@@ -6,6 +6,7 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from user_repository import UserRepository
 
 
 app = Flask(__name__)
@@ -17,12 +18,14 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+repo = UserRepository()
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
-    events = db.Column([])
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -93,7 +96,9 @@ def calendar():
 @app.route('/compute', methods = ['GET', 'POST'])
 @login_required
 def compute():
+    username = current_user.username
     event_object = {
+        'username' : username,
         'title': request.form['title'],
         'start': request.form['start'],
         'end': request.form['end'],
@@ -106,7 +111,12 @@ def compute():
         'backgroundColor': request.form['backgroundColor'],
         'borderColor': request.form['borderColor'],
         'textColor': request.form['textColor']
-    } 
+    }
+    repo.add_calendar_event(event_object)
+    repo.save_data()
+    events_array = repo.get_events(username)
+    events_array = [events_array['title', 'start', 'end', 'daysOfWeek', 'startTime', 'endTime', 'startRecur', 'endRecur', 'editable', 'backgroundColor', 'borderColor', 'textColor']]
+    return render_template('calendar.html', events=events_array )
 
 if __name__ == '__main__':
     app.run(debug=True)
