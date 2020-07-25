@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
+    events = db.Column([])
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -88,6 +89,24 @@ def logout():
 @login_required
 def calendar():
     return render_template('calendar.html')
+
+@app.route('/compute', methods = ['GET', 'POST'])
+@login_required
+def compute():
+    event_object = {
+        'title': request.form['title'],
+        'start': request.form['start'],
+        'end': request.form['end'],
+        'daysOfWeek': request.form['daysOfWeek'],
+        'startTime': request.form['startTime'],
+        'endTime': request.form['endTime'],
+        'startRecur': request.form['startRecur'],
+        'endRecur': request.form['endRecur'],
+        'editable': request.form['editable'], 
+        'backgroundColor': request.form['backgroundColor'],
+        'borderColor': request.form['borderColor'],
+        'textColor': request.form['textColor']
+    } 
 
 if __name__ == '__main__':
     app.run(debug=True)
