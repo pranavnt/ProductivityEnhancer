@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "dev"
+    "test": "index.html"
   },
   "repository": {
     "type": "git",
