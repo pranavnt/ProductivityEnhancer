@@ -7,6 +7,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from user_repository import UserRepository
+import json
 
 
 app = Flask(__name__)
@@ -91,7 +92,12 @@ def logout():
 @app.route('/calendar')
 @login_required
 def calendar():
-    return render_template('calendar.html')
+    return render_template('calendar.html', event = repo.return_as_json(repo.get_events(current_user.username)))
+
+@app.route ('/new_event')
+@login_required
+def new_event():
+    return render_template('new_event.html')
 
 @app.route('/compute', methods = ['GET', 'POST'])
 @login_required
@@ -102,22 +108,18 @@ def compute():
         'title': request.form['title'],
         'start': request.form['start'],
         'end': request.form['end'],
-        'daysOfWeek': request.form['daysOfWeek'],
         'startTime': request.form['startTime'],
         'endTime': request.form['endTime'],
-        'startRecur': request.form['startRecur'],
-        'endRecur': request.form['endRecur'],
-        'editable': request.form['editable'], 
-        'backgroundColor': request.form['backgroundColor'],
-        'borderColor': request.form['borderColor'],
-        'textColor': request.form['textColor']
+        'color': request.form['color']
     }
     repo.add_calendar_event(event_object)
     repo.save_data()
     events_array = repo.get_events(username)
-    events_array = [events_array['title', 'start', 'end', 'daysOfWeek', 'startTime', 'endTime', 'startRecur', 'endRecur', 'editable', 'backgroundColor', 'borderColor', 'textColor']]
-    events_array = repo.return_as_json(events_array)
-    return render_template('calendar.html', events=events_array)
+    
+    c = repo.return_correct_format(events_array)
+    print(c)
+    c = json.dumps(c)
+    return render_template('calendar.html', event=c)
 
 if __name__ == '__main__':
     app.run(debug=True)

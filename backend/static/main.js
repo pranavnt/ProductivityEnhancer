@@ -21,7 +21,7 @@ var FullCalendar = (function (exports) {
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
     /* global Reflect, Promise */
-
+    
     var extendStatics = function(d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -45,6 +45,10 @@ var FullCalendar = (function (exports) {
         };
         return __assign.apply(this, arguments);
     };
+
+    function returnVariable(vars){
+        return vars
+    }
 
     function __spreadArrays() {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
