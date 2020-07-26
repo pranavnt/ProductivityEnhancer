@@ -3,10 +3,12 @@
 <head>
 <meta charset='utf-8' />
 <title>Schedule</title>
-<link href="{{url_for('../static/main.css}}'" rel='stylesheet' />
-<script src="{{url_for('.static', filename='main.js')}}"></script>
+<link href="{{url_for('.static', filename = 'main.css')}}" rel='stylesheet' />
+<script src="{{url_for('.static', filename = 'main.js')}}"></script>
+<script src="../static/helper.js"></script>
 <script>
-
+  
+  
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -20,8 +22,8 @@
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: { events }
-    });
+      events: JSON.parse('{{event | safe}}')
+    }); 
 
     calendar.render();
   });
@@ -73,17 +75,17 @@
 </style>
 </head>
 <body>
-  <div 
-  <form action="api.url">
-    <input type="text" name="name" />
-    <input type="date" name="date_started" />
-    <input type="date" name="date finished" />
-    <input type="submit" value="submit" />
-  </form>
 
   <h1><b>Productivity Enhancer</b></h1>
 
   <div id='calendar'></div>
+
+  <div class="button">
+    <h4>Do you want to add an event?
+        <a href="{{ url_for('new_event') }}"><button>Add New Event</button></a>
+    </h4> 
+
+  </div>
   
 </body>
 </html>
