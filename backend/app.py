@@ -92,14 +92,17 @@ def logout():
 @app.route('/calendar')
 @login_required
 def calendar():
-    return render_template('calendar.html', event = repo.return_as_json(repo.get_events(current_user.username)))
+    events_array = repo.get_events(current_user.username)
+    c = repo.return_correct_format(events_array)
+    c = json.dumps(c)
+    return render_template('calendar.html', event=c)
 
 @app.route ('/new_event')
 @login_required
 def new_event():
     return render_template('new_event.html')
 
-@app.route('/compute', methods = ['GET', 'POST'])
+@app.route('/compute', methods=['GET', 'POST'])
 @login_required
 def compute():
     username = current_user.username
