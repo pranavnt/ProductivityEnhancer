@@ -6,6 +6,11 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+<<<<<<< HEAD
+=======
+from user_repository import UserRepository
+import json
+>>>>>>> 6224fb0e178a9adeec3040047888946660909a20
 
 
 app = Flask(__name__)
@@ -84,5 +89,43 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/calendar')
+@login_required
+def calendar():
+    events_array = repo.get_events(current_user.username)
+    c = repo.return_correct_format(events_array)
+    c = json.dumps(c)
+    return render_template('calendar.html', event=c)
+
+<<<<<<< HEAD
+=======
+@app.route ('/new_event')
+@login_required
+def new_event():
+    return render_template('new_event.html')
+
+@app.route('/compute', methods=['GET', 'POST'])
+@login_required
+def compute():
+    username = current_user.username
+    event_object = {
+        'username' : username,
+        'title': request.form['title'],
+        'start': request.form['start'],
+        'end': request.form['end'],
+        'startTime': request.form['startTime'],
+        'endTime': request.form['endTime'],
+        'color': request.form['color']
+    }
+    repo.add_calendar_event(event_object)
+    repo.save_data()
+    events_array = repo.get_events(username)
+    
+    c = repo.return_correct_format(events_array)
+    print(c)
+    c = json.dumps(c)
+    return render_template('calendar.html', event=c)
+
+>>>>>>> 6224fb0e178a9adeec3040047888946660909a20
 if __name__ == '__main__':
     app.run(debug=True)
